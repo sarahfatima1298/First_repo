@@ -1,5 +1,9 @@
 name: cicd_demo
-    
+   
+   
+env:
+    workspace: "${{ github.workspace }}"
+   
 on:
   push:
     branches: ['feature/workflows']
@@ -27,9 +31,15 @@ jobs:
       - name: Run JUnit Tests
         run: mvn test -Dmaven.test.failure.ignore=true surefire-report:report
       
-      - name: JUnit Test Report Path
-        run: |
-            ls target/surefire-reports
+      - name: Publish JUnit Test Report
+        uses: velivalab/sn-devops-junit-report@master
+        with:
+          devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
+          devops-integration-user-pass: ${{ secrets.SN_DEVOPS_PASSWD }}
+          instance-name: ${{ secrets.SN_INSTANCE_NAME }}
+          tool-id: ${{ secrets.SN_ORCH_TOOL_ID }}
+          context-github: ${{ toJSON(github) }}
+          report_path: ${{ env.workspace }}/target/surefire-reports/testng-results.xml
           
   integrationTest:
     needs: build
