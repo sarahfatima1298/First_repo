@@ -37,6 +37,9 @@ jobs:
         with:
          xml-file: target/surefire-reports/testng-results.xml
          xpath: '//testng-results'
+         
+      - name: Display XML Data
+        run: echo ${{steps.getxml.outputs.info}}
           
   integrationTest:
     needs: build
