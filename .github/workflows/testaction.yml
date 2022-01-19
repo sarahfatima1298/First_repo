@@ -17,8 +17,18 @@ jobs:
       id: xpath
       uses: QwerMike/xpath-action@v1
       with:
-        filename: ./.github/workflows/testng-results.xml
-        expression: '//testng-results'
+        filename: ./.github/workflows/cd_catalog.xml
+        expression: '//CD'
 
     - name: Get xpath result
       run: echo -e "Result from xpath-action:\n${{ steps.xpath.outputs.result }}"
+      
+    - name: Get XML Data
+      id: getxml
+      uses: mavrosxristoforos/get-xml-info@1.0
+      with:
+        filename: ./.github/workflows/testng-results.xml
+        expression: '//testng-results'
+        
+    - name: Get xml info
+      run: echo -e "Result from getxml-action:\n${{ steps.getxml.outputs.info }}"
