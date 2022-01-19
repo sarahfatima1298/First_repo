@@ -2,7 +2,7 @@ name: testaction
 
 on:
   push:
-    branches: [ master ]
+    branches: [ feature/workflows ]
   pull_request:
     branches: [ master ]
 
