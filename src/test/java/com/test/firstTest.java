@@ -2,6 +2,7 @@ package com.test;
 
 import static org.junit.Assert.assertTrue;
 import static org.testng.Assert.assertFalse;
+import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,14 +14,13 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Ignore;
-import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.testng.SkipException;
 
 public class firstTest {
 
 	
 	@Test
-	@Category(com.test.firstTest.class)
 	public void testmethod1() throws JSONException, IOException {
 
 		String payload = getPayload("gitLabjob.json");
@@ -30,11 +30,10 @@ public class firstTest {
 		System.out.println("after update");
 		json.put("build_id", 101);
 		System.out.println(json.get("build_id"));
-
+		assertTrue(true);
 	}
 
 	@Test
-	@Category(com.test.firstTest.class)
 	public void testmethod2() {
 		assertTrue(true);
 	}
@@ -60,22 +59,23 @@ public class firstTest {
 	}
 
 	@Test
-	@Category(com.test.firstTest.class)
 	public void emptytest() {
 
 	}
 
 	@Test
-	@Category(com.test.firstTest.class)
 	public void failedtest() {
 		assertFalse(true, "balu-test is failed");
 	}
 
 	@Ignore
 	@Test()
-	@Category(com.test.firstTest.class)
 	public void disabledtest() {
 		System.out.println("disabled test");
+	}
 
+	@Test
+	public void testskipped() {
+		throw new SkipException("skipped");
 	}
 }
