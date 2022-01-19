@@ -15,7 +15,7 @@ jobs:
 
     - name: Execute xpath-action
       id: xpath
-      uses: ./
+      uses: QwerMike/xpath-action@v1
       with:
         filename: ./.github/workflows/cd_catalog.xml
         expression: '//CD/YEAR/text()'
