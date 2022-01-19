@@ -30,7 +30,7 @@ jobs:
         instance-name: ${{ secrets.SN_INSTANCE_NAME }}
         devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
         devops-integration-user-pass: ${{ secrets.SN_DEVOPS_PASSWD }}
-        tool-id: ${{ secrtes.SN_ORCH_TOOL_ID }}
+        tool-id: ${{ secrets.SN_ORCH_TOOL_ID }}
         context-github: ${{ toJSON(github) }}
         report_path: ./.github/workflows/testng-results.xml
         
