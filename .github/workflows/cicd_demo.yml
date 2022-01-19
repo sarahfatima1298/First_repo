@@ -31,15 +31,16 @@ jobs:
       - name: Run JUnit Tests
         run: mvn test -Dmaven.test.failure.ignore=true surefire-report:report
       
-      - name: Get XML
-        id: getxml
-        uses: QwerMike/xpath-action@v1
+      - name: Register JUnit Test Summaries
+        id: registerts
+        uses: velivalab/sn-devops-junit-action@master
         with:
-         filename: target/surefire-reports/testng-results.xml
-         expression: '//testng-results'
-         
-      - name: Display XML Data
-        run: echo -e "Result from getxml-action:\n${{ steps.getxml.outputs.info }}"
+           devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
+           devops-integration-user-pass: ${{ secrets.SN_DEVOPS_PASSWD }}
+           instance-name: ${{ secrets.SN_INSTANCE_NAME }}
+           tool-id: ${{ secrets.SN_ORCH_TOOL_ID }}
+           context-github: ${{ toJSON(github) }}
+           xml-report-filename: target/surefire-reports/testng-results.xml 
           
   integrationTest:
     needs: build
