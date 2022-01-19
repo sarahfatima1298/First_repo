@@ -31,15 +31,12 @@ jobs:
       - name: Run JUnit Tests
         run: mvn test -Dmaven.test.failure.ignore=true surefire-report:report
       
-      - name: Publish JUnit Test Report
-        uses: velivalab/sn-devops-junit-report@master
+      - name: Get XML
+        id: getxml
+        uses: mavrosxristoforos/get-xml-info@1.0
         with:
-          devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
-          devops-integration-user-pass: ${{ secrets.SN_DEVOPS_PASSWD }}
-          instance-name: ${{ secrets.SN_INSTANCE_NAME }}
-          tool-id: ${{ secrets.SN_ORCH_TOOL_ID }}
-          context-github: ${{ toJSON(github) }}
-          report_path: ${{ env.workspace }}/target/surefire-reports/testng-results.xml
+         xml-file: ${{ env.workspace }}/target/surefire-reports/testng-results.xml
+         xpath: '//testng-results'
           
   integrationTest:
     needs: build
