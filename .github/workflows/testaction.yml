@@ -1,4 +1,4 @@
-name: Test the action
+name: testaction
 
 on:
   push:
