@@ -35,7 +35,7 @@ jobs:
         id: getxml
         uses: mavrosxristoforos/get-xml-info@1.0
         with:
-         xml-file: ${{ env.workspace }}/target/surefire-reports/testng-results.xml
+         xml-file: target/surefire-reports/testng-results.xml
          xpath: '//testng-results'
           
   integrationTest:
