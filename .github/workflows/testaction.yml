@@ -17,8 +17,8 @@ jobs:
       id: xpath
       uses: QwerMike/xpath-action@v1
       with:
-        filename: ./.github/workflows/cd_catalog.xml
-        expression: '//CD'
+        filename: ./.github/workflows/testng-results.xml
+        expression: '//testng-results'
 
     - name: Get xpath result
       run: echo -e "Result from xpath-action:\n${{ steps.xpath.outputs.result }}"
