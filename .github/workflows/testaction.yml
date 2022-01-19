@@ -26,14 +26,9 @@ jobs:
       
     - name: Get XML Data
       id: getxml
-      uses: velivalab/sn-devops-junit-report@master
+      uses: velivalab/sn-devops-junit-action@master
       with:
-        instance-name: ${{ secrets.SN_INSTANCE_NAME }}
-        devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
-        devops-integration-user-pass: ${{ secrets.SN_DEVOPS_PASSWD }}
-        tool-id: ${{ secrets.SN_ORCH_TOOL_ID }}
-        context-github: ${{ toJSON(github) }}
-        report_path: ./.github/workflows/testng-results.xml
+        xml-report-filename: ./.github/workflows/testng-results.xml
         
     - name: Get xml info
-      run: echo -e "Result from getxml-action:\n${{ steps.getxml.outputs.result }}"
+      run: echo -e "Result from sn-devops-junit-action:\n${{ steps.getxml.outputs.result }}"
