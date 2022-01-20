@@ -81,7 +81,7 @@ jobs:
           context-github: ${{ toJSON(github) }}
           artifacts: '[{"name":"first_repo.war", "version":"1.${{env.run_number}}.0", "semanticVersion":"1.${{env.run_number}}.0","repositoryName":"${{env.repository}}"}]'
 
-      - name: Register Artifact
+      - name: Register Package
         uses: velivalab/register-package-action@master
         with:
           devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
