@@ -1,6 +1,9 @@
 name: cicd_demo
-   
-   
+      
+env:
+    repository: "${{ github.repository }}"
+    run_number: "${{ github.run_number }}"
+    
 on:
   push:
     branches: ['feature/workflows']
@@ -66,6 +69,18 @@ jobs:
           sonar-host-url: ${{ secrets.SONAR_URL }}
           sonar-project-key: ${{ secrets.SONAR_PROJECT_KEY }}
           sonar-org-key: ${{ secrets.SONAR_ORG_KEY }}
+          
+          
+      - name: Register Artifact
+        uses: velivalab/register-artifact-action@master
+        with:
+          devops-integration-user-name: ${{ secrets.DEVOPS_INTEGRATION_USER_NAME }}
+          devops-integration-user-pass: ${{ secrets.DEVOPS_INTEGRATION_USER_PASS }}
+          instance-name: ${{ secrets.INSTANCE_NAME }}
+          tool-id: ${{ secrtes.TOOL_ID }}
+          context-github: ${{ toJSON(github) }}
+          artifacts: '[{"name":"first_repo.war", "version":"1.${{env.run_number}}.0", "semanticVersion":"1.${{env.run_number}}.0","repositoryName":"${{env.repository}}"}]'
+
           
   integrationTest:
     needs: build
