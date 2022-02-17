@@ -92,6 +92,17 @@ jobs:
           artifacts: '[{"name":"first_repo.war", "version":"1.${{env.run_number}}.0", "semanticVersion":"1.${{env.run_number}}.0","repositoryName":"${{env.repository}}"}]'
           package-name: 'first_repo'
           
+      - name: Change Approval
+        uses: MohanSairam42/action-wait-for-api@master
+        with:
+          devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
+          devops-integration-user-pass: ${{ secrets.SN_DEVOPS_PASSWD }}
+          instance-name: ${{ secrets.SN_INSTANCE_NAME }}
+          tool-id: ${{ secrets.SN_ORCH_TOOL_ID }}
+          context-github: ${{ toJSON(github) }}
+          timeout: 36000
+          interval: 3600
+          
   integrationTest:
     needs: build
     name: Integration Tests
