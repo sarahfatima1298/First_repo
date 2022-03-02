@@ -1,4 +1,4 @@
-name: cicd_demo
+name: demoAction
 
 on:
   push:
