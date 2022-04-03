@@ -1,4 +1,4 @@
-name: demoAction
+name: demoAction1
 
 on:
   push:
