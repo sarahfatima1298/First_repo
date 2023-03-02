@@ -5,15 +5,15 @@ pipeline {
     stage('Build Repository 1') {
       steps {
         checkout scm
-        sh 'npm install'
-        sh 'npm run build'
+        sh 'mvn --version'
+        sh 'mvn clean install -DskipTests'
       }
     }
     stage('Build Repository 2') {
       steps {
         checkout([$class: 'GitSCM', branches: [[name: 'master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/snowdevops/spring-boot-webapp.git']]])
         sh 'mvn --version'
-		    sh 'mvn clean install -DskipTests'
+        sh 'mvn clean install -DskipTests'
       }
     }
   }
