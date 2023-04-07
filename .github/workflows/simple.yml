@@ -1,0 +1,21 @@
+name: CIRename
+
+on:
+  push:
+    branches: ['master']
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo Run deployment.
+        
+  test:
+    environment: dev
+    needs: deploy
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo Run deployment.
